@@ -103,6 +103,9 @@
       thisProduct.priceElem = thisProduct.element.querySelector(
         select.menuProduct.priceElem
       );
+      thisProduct.imageWrapper = thisProduct.element.querySelector(
+        select.menuProduct.imageWrapper
+      );
     }
 
     initAccordion() {
@@ -168,18 +171,37 @@
         for (let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
+
           console.log(optionId, option);
 
+          const optionSelected =
+            formData[paramId] && formData[paramId].includes(optionId);
+
+          const optionImage = thisProduct.imageWrapper.querySelector(
+            `.` + paramId + `-` + optionId
+          );
+
           //check if there is param with a name of paramId in formData and if it includes optionId
-          if (formData[paramId] && formData[paramId].includes(optionId)) {
+          if (optionSelected) {
             if (!option.default == true) {
               price += option.price;
             }
           } else if (option.default == true) {
             price -= option.price;
           }
+
+          // Add and remove images
+          if (optionImage) {
+            if (optionSelected) {
+              optionImage.classList.add(classNames.menuProduct.imageVisible);
+            } else if (!optionSelected) {
+              optionImage.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
         }
       }
+
+      //activeProduct.classList.remove(`classNames.menuProduct.imageVisible`);
 
       // update calculated price in the HTML
       thisProduct.priceElem.innerHTML = price;
