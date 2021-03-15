@@ -422,12 +422,16 @@
 
     add(menuProduct) {
       const thisCart = this;
-
-      const generatedHTML = templates.menuProduct(menuProduct.data);
+      const generatedHTML = templates.cartProduct(menuProduct);
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
-      thisCart.dom.productList.appendChild(generatedDOM);
 
-      console.log(`adding product`, menuProduct);
+      thisCart.dom.productList.appendChild(generatedDOM);
+      //console.log('adding product', menuProduct);
+
+      // eslint-disable-next-line no-undef
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
+      //console.log('thisCart.products', thisCart.products);
+      thisCart.update();
     }
   }
 
