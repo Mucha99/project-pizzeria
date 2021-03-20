@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 
 {
@@ -414,6 +415,13 @@
       thisCart.dom.totalNumber = thisCart.dom.wrapper.querySelector(
         select.cart.totalNumber
       );
+      thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
+      thisCart.dom.phone = thisCart.dom.wrapper.querySelector(
+        select.cart.phone
+      );
+      thisCart.dom.address = thisCart.dom.wrapper.querySelector(
+        select.cart.address
+      );
     }
 
     initActions() {
@@ -427,8 +435,13 @@
         thisCart.update();
       });
 
-      thisCart.dom.productList.addEventListener(`remove`, function (event) {
+      thisCart.dom.productList.addEventListener("remove", function (event) {
         thisCart.remove(event.detail.cartProduct);
+      });
+
+      thisCart.dom.form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        thisCart.sendOrder();
       });
     }
 
@@ -476,15 +489,43 @@
       console.log(`totalPrice:`, thisCart.totalPrice);
     }
 
-    remove(CartProduct) {
+    remove(cartProduct) {
+      const thisCart = this;
+      const productIndex = thisCart.products.indexOf(cartProduct);
+      thisCart.products.splice(productIndex, 1);
+      cartProduct.dom.wrapper.remove();
+      thisCart.update();
+    }
+
+    sendOrder() {
       const thisCart = this;
 
-      CartProduct.dom.wrapper.remove();
+      const url = settings.db.url + `/` + settings.db.order;
 
-      const indexOfProduct = thisCart.products.indexOf(CartProduct);
-      thisCart.products.splice(indexOfProduct, 1);
+      const payload = {
+        address: thisCart.dom.address[`value`],
+        phone: thisCart.dom.phone[`value`],
+        totalPrice: thisCart.totalPrice,
+        subtotalPrice: thisCart.subtotalPrice,
+        totalNumber: thisCart.totalNumber,
+        deliveryFee: thisCart.deliveryFee,
+        prducts: [],
+      };
 
-      thisCart.update();
+      for (let prod of thisCart.products) {
+        payload.products.push(prod.getData());
+      }
+
+      const options = {
+        // eslint-disable-next-line quotes
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      };
+
+      fetch(url, options);
     }
   }
 
@@ -563,6 +604,20 @@
         event.preventDefault();
         thisCartProduct.remove();
       });
+    }
+
+    getData() {
+      const thisCartProduct = this;
+
+      const products = {
+        id: thisCartProduct.id,
+        amount: thisCartProduct.amount,
+        price: thisCartProduct.price,
+        priceSingle: thisCartProduct.priceSingle,
+        name: thisCartProduct.name,
+        params: thisCartProduct.params,
+      };
+      return products;
     }
   }
 
