@@ -452,7 +452,6 @@
 
       thisCart.dom.productList.appendChild(generatedDOM);
 
-      // eslint-disable-next-line no-undef
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       thisCart.update();
     }
@@ -474,6 +473,7 @@
       } else {
         thisCart.deliveryFee = 0;
         thisCart.subtotalPrice = 0;
+        thisCart.totalPrice = 0;
       }
 
       thisCart.dom.deliveryFee.innerHTML = thisCart.deliveryFee;
@@ -509,7 +509,7 @@
         subtotalPrice: thisCart.subtotalPrice,
         totalNumber: thisCart.totalNumber,
         deliveryFee: thisCart.deliveryFee,
-        prducts: [],
+        products: [],
       };
 
       for (let prod of thisCart.products) {
@@ -539,7 +539,7 @@
       thisCartProduct.priceSingle = menuProduct.priceSingle;
       thisCartProduct.price = menuProduct.price;
       thisCartProduct.params = menuProduct.params;
-
+      console.log(thisCartProduct.getData());
       thisCartProduct.getElements(element);
       thisCartProduct.initAmountWidget();
       thisCartProduct.initActions();
