@@ -1,6 +1,6 @@
 /* eslint-disable quotes */
 import { select, templates, settings, classNames } from "../settings.js";
-import utils from "../utils.js";
+import { utils } from "../utils.js";
 import CartProduct from "../components/CartProduct.js";
 
 class Cart {
