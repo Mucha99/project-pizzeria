@@ -73,7 +73,6 @@ class Cart {
     thisCart.dom.productList.appendChild(generatedDOM);
 
     thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
-    console.log(thisCart.products);
     thisCart.update();
   }
 
@@ -103,11 +102,6 @@ class Cart {
     for (let price of thisCart.dom.totalPrice) {
       price.innerHTML = thisCart.totalPrice;
     }
-
-    console.log(`deliveryFree:`, thisCart.deliveryFee);
-    console.log(`totalNumber:`, thisCart.totalNumber);
-    console.log(`subtotalPrice:`, thisCart.subtotalPrice);
-    console.log(`totalPrice:`, thisCart.totalPrice);
   }
 
   remove(cartProduct) {
