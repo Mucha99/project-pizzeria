@@ -72,9 +72,11 @@
 }
 
 .image-order:hover {
+
   a{
     margin-top: -10px;
   }
+
   .description {
     opacity: 1;
     margin-top: -10px;
@@ -165,6 +167,7 @@
     z-index: 2;
     opacity: 0;
     transition: 0.2s;
+
     &:hover{
       opacity: 1;
     }
@@ -177,6 +180,7 @@
   height: 170px;
   border-radius: 5px;
   transition: 0.1s;
+
   &:hover{
     opacity: 0.5;
   }
@@ -188,6 +192,7 @@
   height: 170px;
   border-radius: 5px;
   transition: 0.5s;
+
   &:hover{
     opacity: 0.5;
   }
@@ -199,6 +204,7 @@
   height: 170px;
   border-radius: 5px;
   transition: 0.5s;
+
   &:hover{
     opacity: 0.5;
   }
@@ -210,6 +216,7 @@
   height: 170px;
   border-radius: 5px;
   transition: 0.5s;
+
   &:hover{
     opacity: 0.5;
   }
@@ -221,6 +228,7 @@
   height: 170px;
   border-radius: 5px;
   transition: 0.5s;
+
   &:hover{
     opacity: 0.5;
   }
@@ -232,6 +240,7 @@
   height: 170px;
   border-radius: 5px;
   transition: 0.5s;
+  
   &:hover{
     opacity: 0.5;
   }
