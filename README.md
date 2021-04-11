@@ -1,3 +1,3 @@
 # project-pizzeria
 
-https://kodilla.com/pl
+https://lit-spire-97783.herokuapp.com/
