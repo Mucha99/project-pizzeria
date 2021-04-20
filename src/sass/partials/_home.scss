@@ -12,9 +12,10 @@
   padding: 70px 50px;
   background-color: $color-light;
 }
-
-.row {
-  overflow: auto;
+ 
+.row-slider {
+  overflow: hidden;
+  width: 100%;
 }
 
 .col {
